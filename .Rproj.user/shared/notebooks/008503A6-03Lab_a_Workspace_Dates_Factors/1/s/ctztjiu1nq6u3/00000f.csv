@@ -1,8 +1,0 @@
-"0","# The working directory should be set to the base folder for your forked  "
-"0","# course repository, i.e., the folder that houses the R Project file."
-"0",""
-"0","getwd()"
-"1","[1]"
-"1"," ""/home/guest/R/EDE_Fall2025"""
-"1","
-"
