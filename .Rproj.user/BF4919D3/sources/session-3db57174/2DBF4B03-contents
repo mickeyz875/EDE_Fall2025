@@ -79,8 +79,10 @@ NTL.phys.data.JunethruOctober <- filter(NTL.phys.data, daynum %in% c(152:304))
 ```{r Exercise 1 & 2}
 # Exercise 1: 
 # filter NTL.phys.data for the year 1999
-# what code do you need to use, based on the class of the variable?
+NTL.phys.data_1999 = filter(NTL.phys.data, year4 == 1999)
 
+# what code do you need to use, based on the class of the variable?
+NTL.phys.data_Tues = 
 
 # Exercise 2: 
 # filter NTL.phys.data for Tuesday Lake from 1990 through 1999.
