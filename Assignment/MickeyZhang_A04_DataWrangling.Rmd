@@ -98,10 +98,14 @@ PM25_2019 = PM25_2019 %>%
 #5
 PM25_2018 = PM25_2018 %>%
   mutate(AQS_PARAMETER_DESC = "PM2.5")
-  
+PM25_2019 = PM25_2019 %>%
+  mutate(AQS_PARAMETER_DESC = "PM2.5")
 
 #6
-
+# write.csv(O3_2018,row.names = FALSE, file="Data/Processed/EPAair_O3_NC2018_processed.csv")
+# write.csv(O3_2019, row.names = FALSE,file="Data/Processed/EPAair_O3_NC2019_processed.csv")
+# write.csv(PM25_2018,row.names = FALSE, file = "Data/Processed/EPAair_PM25_NC2018_processed.csv")
+# write.csv(PM25_2019,row.names = FALSE, file = "Data/Processed/EPAair_PM25_NC2019_processed.csv")
 ```
 
 
