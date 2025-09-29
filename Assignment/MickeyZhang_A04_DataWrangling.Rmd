@@ -193,7 +193,7 @@ EPAair_Processed = EPAair_Processed %>%
   mutate(Year = year(Date)) %>%
   group_by(Date, Site.Name, Month,Year) %>%
   summarise(meanOZ = mean(Ozone),
-            meanOM25 = mean(PM2.5)) %>%
+            meanPM25 = mean(PM2.5)) %>%
   drop_na(meanOZ)
 #13
 
@@ -203,5 +203,4 @@ dim(EPAair_Processed)
 
 14. Why did we use the function `drop_na` rather than `na.omit`? Hint: replace `drop_na` with `na.omit` in part 12 and observe what happens with the dimensions of the summary date frame.
 
-> Answer: We use drop_na() instead of na.omit() because drop_na() is designed to work seamlessly within a dplyr pipe, while the base R na.omit() can sometimes cause unexpected issues with later group_by() and summarise() steps.
-
+> Answer:  Dimension with `na.omit()` : 3262x6. We use `drop_na()` instead of `na.omit()` because `na.omit()` will also remove rows that contains `'NA'` PM2.5 values
