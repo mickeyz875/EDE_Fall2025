@@ -3,7 +3,9 @@ title: 'A06 - Crafting Reports'
 author: "Mickey Zhang" 
 date: "Fall 2025"
 output: pdf_document
+toc: TRUE
 ---
+\listoffigures
 
 ## Objectives:
 
@@ -43,7 +45,7 @@ Source  | EPA Air Quality System (AQS)
 
 Set the following R code chunk so that it runs when knit, but no messages, errors, or any output is shown. The code itself, however, should be displayed.
 
-```{r project.setup}
+```{r project.setup, echo= TRUE, message=FALSE, warning=FALSE, error=FALSE, results='hide'}
 #Import libraries
 library(tidyverse)
 library(lubridate)
@@ -62,7 +64,7 @@ epa_data <- read.csv(
 ## Task 3: Creating tables
 
 Set the following R code chunk to display two tables, using knitr's `kable()` function, one listing the mean PM2.5 concentrations for each county, and the other the same except for Ozone. 
-
+      
 -   The titles should be "Mean Particulates (2.5mm)" and "Mean Ozone", respectively. 
 -   The column names should be "County" and "µg/m3" for both tables. (See tip below.)
 -   Finally, round the concentration values in the 2nd column to two decimal places.
@@ -76,7 +78,7 @@ Customize the chunk options such that the code is run but is not displayed in th
 > -   If your output table spans across two pages, try inserting a page break in the markdown just before your code chunk.
 
 
-```{r data.summary}
+```{r data.summary, echo= FALSE}
 #Compute mean PM2.5 concentration for each county, sorted by value
 summary_PM25 <- epa_data %>% 
   drop_na(PM2.5) %>% 
@@ -93,15 +95,40 @@ summary_Ozone <- epa_data %>%
   arrange(mean_Ozone)
 
 #Use the `kable` function to produce the 2 tables in markdown format
+knitr::kable(summary_PM25, caption = "Mean Particulates (2.5mm)",
+             col.names = c("County", "$\\mu g/m^3$"),
+             digits = 2)
 
+knitr::kable(summary_Ozone, caption = "Mean Ozone",
+             col.names = c("County", "$\\mu g/m^3$"),
+             digits = 2)
 ```
 
 ---
 
 ## Task 4: Plots
 
-Below this paragraph, but above the horizonal line (`---`), create two separate code chunks that create boxplots of the distribution of Ozone levels by month using, one for only records collected in 2018 and one for records in 2019. Customize the chunk options such that the final figures are displayed but not the code used to generate the figures. In addition, align the plots on the left side of the page and set the figure heights so both plots fit on the same page with minimal space remaining. Lastly, add a `fig.cap` chunk option to add a caption (title) to your plot that will display underneath the figure.
+Below this paragraph, but above the horizontal line (`---`), create two separate code chunks that create boxplots of the distribution of Ozone levels by month using, one for only records collected in 2018 and one for records in 2019. Customize the chunk options such that the final figures are displayed but not the code used to generate the figures. In addition, align the plots on the left side of the page and set the figure heights so both plots fit on the same page with minimal space remaining. Lastly, add a `fig.cap` chunk option to add a caption (title) to your plot that will display underneath the figure.
 
+```{r boxplot.2018, echo=FALSE, fig.height=3, fig.cap = "2018 monthly Ozone levels"}
+ggplot(drop_na(subset(epa_data, Year == 2018)),
+       aes(y = Ozone, x = factor(month.abb[Month],levels = month.abb)))+
+  geom_boxplot()+
+  labs(title = "Monthly Ozone concentrations(2018)",
+       x = "Month",
+       y =expression(paste("Concentration (", mu, "g/m"^3, ")"))
+       ) 
+```
+
+```{r boxplot.2019, echo=FALSE, fig.cap = "2019 monthly Ozone levels", fig.height=3}
+ggplot(drop_na(subset(epa_data, Year == 2019)),
+       aes(y = Ozone, x = factor(month.abb[Month],levels = month.abb)))+
+  geom_boxplot()+
+  labs(title = "Monthly Ozone concentrations (2019)",
+       x = "Month",
+       y =expression(paste("Concentration (", mu, "g/m"^3, ")"))
+       ) 
+```
 
 ---
 
@@ -112,3 +139,9 @@ Below this paragraph, but above the horizonal line (`---`), create two separate 
 Add a table of contents and list of figures to your document and knit to a PDF. Submit your PDF to Sakai, but also be sure to commit and push your Rmd file used to create this knit document to GitHub. In the section below, add a link to your GitHub repository. **Lastly, add the statement that you did not use AI in the completion of this assignment followed by your name and the date.** 
 
 ## Git Repository
+
+<https://github.com/mickeyz875/EDE_Fall2025>
+
+I did not use AI in the completion of this assignment.
+\newline -Mickey Zhang
+\newline -10/16/2025
