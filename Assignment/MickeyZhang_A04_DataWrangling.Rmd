@@ -162,9 +162,8 @@ EPAair_Processed = EPAair_Processed %>%
   mutate(Year = year(Date))
 
 #9
-EPAair_Processed = EPAair_Processed %>%
+EPAair_Processed <- EPAair_Processed %>%
   pivot_wider(
-    id_cols = c(Date, Site.Name),
     names_from = AQS_PARAMETER_DESC,
     values_from = meanAQI
   )
